@@ -20,12 +20,15 @@ namespace RecipeApp.Controllers
             _context = context;
         }
 
-        // GET: Ingredients/Create
-        public IActionResult Create(int recipeId)
+        // GET: Ingredients/List
+        public async Task<IActionResult> List(int recipeId)
         {
             var ingredientViewModel = new IngredientViewModel();
+            ingredientViewModel.Ingredients = await _context.Ingredients
+                    .Where( i => i.RecipeId == recipeId)
+                    .ToListAsync();
             ingredientViewModel.NewIngredient = new Ingredient() { RecipeId = recipeId };
-            return View(ingredientViewModel);
+            return View("Change",ingredientViewModel);
 
         }
 
@@ -43,45 +46,22 @@ namespace RecipeApp.Controllers
                 _context.Add(ingredientViewModel.NewIngredient);
                 await _context.SaveChangesAsync();
 
-                ModelState.Clear();
-                var Model = new IngredientViewModel();
-                Model.NewIngredient = new Ingredient() { RecipeId = recipeId };
-                Model.Ingredients = await _context.Ingredients
-                    .Where( i => i.RecipeId == recipeId)
-                    .ToListAsync();
-                return View(Model);
+                return RedirectToAction("List",new { recipeId = recipeId });
             }
             return View();
         }
 
-        //// GET: Ingredients/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var ingredient = await _context.Ingredients
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (ingredient == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(ingredient);
-        //}
-
         // POST: Ingredients/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var ingredient = await _context.Ingredients.FindAsync(id);
-        //    _context.Ingredients.Remove(ingredient);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id, int recipeId)
+        {
+            var ingredientToDelete = await _context.Ingredients.FindAsync(id);
+            _context.Ingredients.Remove(ingredientToDelete);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("List",new { recipeId = recipeId });
+        }
 
         private bool IngredientExists(int id)
         {

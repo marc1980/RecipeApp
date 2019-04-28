@@ -1,0 +1,56 @@
+﻿@model RecipeApp.ViewModels.IngredientViewModel
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" asp-controller="Ingredients">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @Html.HiddenFor(model => model.NewIngredient.RecipeId)
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label asp-for="NewIngredient.Name" class="control-label"></label>
+                    <input asp-for="NewIngredient.Name" class="form-control" />
+                    <span asp-validation-for="NewIngredient.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="NewIngredient.Amount" class="control-label"></label>
+                    <input asp-for="NewIngredient.Amount" class="form-control" />
+                    <span asp-validation-for="NewIngredient.Amount" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="NewIngredient.Unit" class="control-label"></label>
+                    <select asp-for="NewIngredient.Unit" asp-items="Html.GetEnumSelectList<UnitOfMeasure>()" class="form-control"></select>
+                    <span asp-validation-for="NewIngredient.Unit" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-1">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+<hr/>
+<div id='ingredientTable'>
+    @foreach (var item in Model.Ingredients) {
+        <div class="row"> 
+            <div class="col-md-3">
+                @Html.DisplayFor(modelItem => item.Name)
+            </div>
+            <div class="col-md-3">
+                @Html.DisplayFor(modelItem => item.Amount)
+            </div>
+            <div class="col-md-3">
+                @Html.DisplayFor(modelItem => item.Unit)
+            </div>
+            <div class="col-md-1">
+                @using(Html.BeginForm("Delete","Ingredients"))
+                {
+                <input type="hidden" name="id" value="@item.Id" />
+                <input type="hidden" name="recipeId" value="@item.RecipeId" />
+                <input type="submit" value="Delete" class="btn btn-default"/>
+                }
+            </div>
+        </div>
+        <hr/>
+    }
+</div>

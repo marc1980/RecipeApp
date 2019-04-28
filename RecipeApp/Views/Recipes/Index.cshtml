@@ -27,9 +27,38 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <button type="button" data-toggle="modal" data-recipe-id="@item.Id" data-target="#deleteModal" class="deleteRecipeModal">Delete</button> 
+              <!--  <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> -->
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<!-- Delete recipe modal -->
+
+<div class="modal" id="deleteModal" tabindex="-1" role="dialog">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Delete recipe</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form id="deleteForm" action="/Recipes/Delete" method="post">
+        <div class="modal-body">
+            <p>Delete this recipe?</p>     
+            <input type="hidden" id="recipeId" name="Id" value="">
+            <button type="submit" id="deleteBtn" class="btn btn-primary">Delete</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        <div class="modal-footer">
+        </div>
+    </form>
+    </div>
+</div>
+</div>
+
+
+

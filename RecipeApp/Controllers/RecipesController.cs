@@ -62,7 +62,7 @@ namespace RecipeApp.Models
                 _context.Add(recipe);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Create", "Ingredients", new { RecipeId = recipe.Id} );
+                return RedirectToAction("List", "Ingredients", new { RecipeId = recipe.Id} );
             }
             return View(recipe);
         }
@@ -118,28 +118,12 @@ namespace RecipeApp.Models
             return View(recipe);
         }
 
-        // GET: Recipes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var recipe = await _context.Recipes
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (recipe == null)
-            {
-                return NotFound();
-            }
-
-            return View(recipe);
-        }
 
         // POST: Recipes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost]
+       // [ValidateAntiForgeryToken]    
+       // TODO: Fix token
+        public async Task<IActionResult> Delete(int id)
         {
             var recipe = await _context.Recipes.FindAsync(id);
             _context.Recipes.Remove(recipe);

@@ -36,8 +36,14 @@ namespace RecipeApp
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddDbContext<RecipeContext>(options =>
-                       options.UseSqlServer(Configuration.GetConnectionString("recipeConfig")));
+          //  services.AddDbContext<RecipeContext>(options =>
+          //             options.UseSqlServer(Configuration.GetConnectionString("recipeConfig")));
+
+              services.AddDbContext<RecipeContext>(options => 
+                    options.UseSqlite(Configuration.GetConnectionString("recipeConfig")));
+
+
+
         
     }
 
