@@ -1,53 +1,70 @@
 ﻿@model RecipeApp.ViewModels.IngredientViewModel
 
-<div class="row">
-    <div class="col-md-12">
-        <form asp-action="Create" asp-controller="Ingredients">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            @Html.HiddenFor(model => model.NewIngredient.RecipeId)
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label asp-for="NewIngredient.Name" class="control-label"></label>
-                    <input asp-for="NewIngredient.Name" class="form-control" />
-                    <span asp-validation-for="NewIngredient.Name" class="text-danger"></span>
-                </div>
-                <div class="form-group col-md-3">
-                    <label asp-for="NewIngredient.Amount" class="control-label"></label>
-                    <input asp-for="NewIngredient.Amount" class="form-control" />
-                    <span asp-validation-for="NewIngredient.Amount" class="text-danger"></span>
-                </div>
-                <div class="form-group col-md-3">
-                    <label asp-for="NewIngredient.Unit" class="control-label"></label>
-                    <select asp-for="NewIngredient.Unit" asp-items="Html.GetEnumSelectList<UnitOfMeasure>()" class="form-control"></select>
-                    <span asp-validation-for="NewIngredient.Unit" class="text-danger"></span>
-                </div>
-                <div class="form-group col-md-1">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </div>
-        </form>
+
+<form asp-action="Create" asp-controller="Ingredients"> 
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+    <div class="tableLine">
+         <input asp-for="NewIngredient.RecipeId" type="hidden"/>   
+         <div class="tableElement50">
+            <label asp-for="NewIngredient.Name" ></label>
+        </div>
+        <div class="tableElement15">
+            <label asp-for="NewIngredient.Amount" ></label>
+        </div>
+        <div class="tableElement15">
+            <label asp-for="NewIngredient.Unit" ></label>
+        </div>
+        <div >
+        </div>
+    </div> 
+    <div class="tableLine">
+        <div class="tableElement50">
+            <input asp-for="NewIngredient.Name" class="form-control"/>
+            <span asp-validation-for="NewIngredient.Name" class="text-danger"></span>
+        </div>
+        <div class="tableElement15">
+            <input asp-for="NewIngredient.Amount"  class="form-control"/>
+            <span asp-validation-for="NewIngredient.Amount" class="text-danger"></span>
+        </div>
+        <div class="tableElement15">
+            <select asp-for="NewIngredient.Unit" asp-items="Html.GetEnumSelectList<UnitOfMeasure>()" class="form-control"></select>
+            <span asp-validation-for="NewIngredient.Unit" class="text-danger"></span>
+        </div>
+        <div class="tableElement15">
+            <button type="submit" value="Create" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
+        </div>
     </div>
+</form> 
+<div>
+    <hr/>
+</div>
 
-<hr/>
 <div id='ingredientTable'>
     @foreach (var item in Model.Ingredients) {
-        <div class="row"> 
-            <div class="col-md-3">
+        <div class="tableLine"> 
+            <div class="tableElement50 padLeft12">
                 @Html.DisplayFor(modelItem => item.Name)
             </div>
-            <div class="col-md-3">
+            <div class="tableElement15 padLeft12">
                 @Html.DisplayFor(modelItem => item.Amount)
             </div>
-            <div class="col-md-3">
+            <div class="tableElement15 padLeft12">
                 @Html.DisplayFor(modelItem => item.Unit)
             </div>
-            <div class="col-md-1">
+            <div class="tableElement15">
                 @using(Html.BeginForm("Delete","Ingredients"))
                 {
                 <input type="hidden" name="id" value="@item.Id" />
                 <input type="hidden" name="recipeId" value="@item.RecipeId" />
-                <input type="submit" value="Delete" class="btn btn-default"/>
+                <button type="submit" value="Delete" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                </button>
                 }
             </div>
         </div>

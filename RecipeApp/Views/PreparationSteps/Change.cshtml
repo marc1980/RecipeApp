@@ -1,0 +1,21 @@
+﻿@model RecipeApp.ViewModels.PreparationStepViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<h4>Add preparation steps</h4>
+<hr />
+
+
+@Html.Partial("~/Views/PreparationSteps/_PreparationStepListChange.cshtml", Model)
+
+<div>
+    @Html.ActionLink("Back to recipe list","Index", "Recipes")
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

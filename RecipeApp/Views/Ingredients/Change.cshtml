@@ -15,6 +15,9 @@
 <div>
     @Html.ActionLink("Back to recipe list","Index", "Recipes")
 </div>
+<div>
+    @Html.ActionLink("Add preparation steps","List" ,"PreparationSteps" , new {recipeId = Model.NewIngredient.RecipeId})
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

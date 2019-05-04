@@ -35,3 +35,19 @@ body {
         display: none;
     }
 }
+.tableLine{
+  /*  margin-left: 15px;
+    padding-left: 20px; */
+    border: 1px;
+}
+.tableElement50{
+    display: inline-block;
+    width: 50%;
+}
+.tableElement15{
+    display: inline-block;
+    width: 15%;
+}
+.padLeft12{
+    padding-left: 12px;
+}

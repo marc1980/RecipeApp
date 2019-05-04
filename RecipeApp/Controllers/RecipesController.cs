@@ -35,6 +35,7 @@ namespace RecipeApp.Models
             var recipe = await _context.Recipes
                 .Where(m => m.Id == id)
                 .Include(m => m.Ingredients)
+                .Include(m => m.Steps)
                 .FirstOrDefaultAsync();
             if (recipe == null)
             {

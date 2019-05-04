@@ -1,0 +1,10 @@
+Form steps
+    automatically determine rank
+    moveUp / MoveDown
+add validations on data
+add reviews via ajax
+Add unit tests
+consistent in html helpers or taghelpers
+add wizzard partial
+add readme
+

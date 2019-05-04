@@ -1,0 +1,48 @@
+﻿@model RecipeApp.ViewModels.PreparationStepViewModel
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" asp-controller="PreparationSteps">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @Html.HiddenFor(model => model.NewStep.RecipeId)
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label asp-for="NewStep.Description" class="control-label"></label>
+                    <input asp-for="NewStep.Description" class="form-control" />
+                    <span asp-validation-for="NewStep.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="NewStep.Rank" class="control-label"></label>
+                    <input asp-for="NewStep.Rank" class="form-control" />
+                    <span asp-validation-for="NewStep.Rank" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-1">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+<hr/>
+<div id='preparationStepTable'>
+    @foreach (var item in Model.PreparationSteps) {
+        <div class="row"> 
+            <div class="col-md-3">
+                @Html.DisplayFor(modelItem => item.Description)
+            </div>
+            <div class="col-md-3">
+                @Html.DisplayFor(modelItem => item.Rank)
+            </div>
+            <div class="col-md-1">
+                @using(Html.BeginForm("Delete","PreparationSteps"))
+                {
+                <input type="hidden" name="id" value="@item.Id" />
+                <input type="hidden" name="recipeId" value="@item.RecipeId" />
+                <input type="submit" value="Delete" class="btn btn-default"/>
+                }
+            </div>
+        </div>
+        <hr/>
+    }
+</div>

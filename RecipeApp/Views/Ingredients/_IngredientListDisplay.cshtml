@@ -2,16 +2,18 @@
 
 <div>
     @foreach (var item in Model) {
-        <span>
-            @Html.DisplayFor(modelItem => item.Amount)
-            &nbsp;
-        </span>
-        <span asp-for="Unit">
-            @Html.DisplayFor(modelItem => item.Unit)
-            &nbsp;
-        </span>
-        <span>
-            @Html.DisplayFor(modelItem => item.Name)
-        </span>
+        <div>
+            <span>
+                @Html.DisplayFor(modelItem => item.Amount)
+                &nbsp;
+            </span>
+            <span>
+                @Html.DisplayFor(modelItem => item.Unit)
+                &nbsp;
+            </span>
+            <span>
+                @Html.DisplayFor(modelItem => item.Name)
+            </span>
+        </div>
     }
 </div>

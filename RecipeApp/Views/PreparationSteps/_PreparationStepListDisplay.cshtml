@@ -1,0 +1,15 @@
+﻿@model IEnumerable<RecipeApp.Models.PreparationStep>
+
+<div>
+    @foreach (var item in Model) {
+        <div>
+            <span>
+                @Html.DisplayFor(modelItem => item.Rank)
+                &nbsp;
+            </span>
+            <span>
+                @Html.DisplayFor(modelItem => item.Description)
+            </span>
+        </div>
+    }
+</div>

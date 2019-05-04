@@ -10,13 +10,13 @@ namespace RecipeApp.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public IEnumerable<Ingredient> Ingredients { get; set; }
-        public IEnumerable<PreparationSteps> Steps { get; set; }
+        public IEnumerable<PreparationStep> Steps { get; set; }
         public IEnumerable<Review> Reviews { get; set; }
 
         public Recipe()
         {
             Ingredients = new List<Ingredient>();
-            Steps = new List<PreparationSteps>();
+            Steps = new List<PreparationStep>();
             Reviews = new List<Review>();
         }
     }

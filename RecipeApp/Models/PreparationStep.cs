@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace RecipeApp.Models
 {
-    public class PreparationSteps
+    public class PreparationStep
     {
         public int Id { get; set; }
+        public int RecipeId { get; set; }
         public int Rank { get; set; }
         public string Description { get; set; }
     }
