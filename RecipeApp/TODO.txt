@@ -1,6 +1,4 @@
 Form steps
-    automatically determine rank
-    moveUp / MoveDown
 add validations on data
 add reviews via ajax
 Add unit tests

@@ -48,6 +48,10 @@ body {
     display: inline-block;
     width: 15%;
 }
+.tableElement5{
+    display: inline-block;
+    width: 5%;
+}
 .padLeft12{
     padding-left: 12px;
 }

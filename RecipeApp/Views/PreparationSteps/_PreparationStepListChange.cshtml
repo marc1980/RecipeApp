@@ -1,45 +1,67 @@
 ﻿@model RecipeApp.ViewModels.PreparationStepViewModel
 
-<div class="row">
-    <div class="col-md-12">
         <form asp-action="Create" asp-controller="PreparationSteps">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            @Html.HiddenFor(model => model.NewStep.RecipeId)
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label asp-for="NewStep.Description" class="control-label"></label>
+        
+            <div class="tableLine">
+                <input asp-for="NewStep.RecipeId" type="hidden"/>   
+                <div class="tableElement50">
                     <input asp-for="NewStep.Description" class="form-control" />
                     <span asp-validation-for="NewStep.Description" class="text-danger"></span>
                 </div>
-                <div class="form-group col-md-3">
-                    <label asp-for="NewStep.Rank" class="control-label"></label>
-                    <input asp-for="NewStep.Rank" class="form-control" />
-                    <span asp-validation-for="NewStep.Rank" class="text-danger"></span>
-                </div>
-                <div class="form-group col-md-1">
+
+                <div class="tableElement15 padLeft12">
                     <input type="submit" value="Create" class="btn btn-default" />
                 </div>
             </div>
         </form>
-    </div>
 
-<hr/>
+<div>
+    <hr/>
+</div>
 <div id='preparationStepTable'>
     @foreach (var item in Model.PreparationSteps) {
-        <div class="row"> 
-            <div class="col-md-3">
+        <div class="tableLine"> 
+            <div class="tableElement50 padLeft12">
                 @Html.DisplayFor(modelItem => item.Description)
             </div>
-            <div class="col-md-3">
-                @Html.DisplayFor(modelItem => item.Rank)
+
+            <div class="tableElement5">
+                @if( item != Model.PreparationSteps.First())
+                {
+                    @using(Html.BeginForm("MoveUp","PreparationSteps"))
+                    {
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <input type="hidden" name="recipeId" value="@item.RecipeId" />
+                    <button type="submit" value="MoveUp" class="btn btn-default">
+                        <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                    </button>
+                    }
+                }
+
             </div>
-            <div class="col-md-1">
+             <div class="tableElement5">
+                @if( item != Model.PreparationSteps.Last())
+                {
+                    @using(Html.BeginForm("MoveDown","PreparationSteps"))
+                    {
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <input type="hidden" name="recipeId" value="@item.RecipeId" />
+                    <button type="submit" value="MoveDown" class="btn btn-default">
+                        <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                    </button>
+                    }
+                }
+            </div>
+            <div class="tableElement5">
                 @using(Html.BeginForm("Delete","PreparationSteps"))
                 {
                 <input type="hidden" name="id" value="@item.Id" />
                 <input type="hidden" name="recipeId" value="@item.RecipeId" />
-                <input type="submit" value="Delete" class="btn btn-default"/>
+                <button type="submit" value="Delete" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </button>
                 }
             </div>
         </div>
