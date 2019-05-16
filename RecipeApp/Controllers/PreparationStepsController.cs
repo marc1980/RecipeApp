@@ -38,14 +38,24 @@ namespace RecipeApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( PreparationStepViewModel PreparationStepViewModel)
+        public async Task<IActionResult> Create(PreparationStepViewModel PreparationStepViewModel)
         {
             if (ModelState.IsValid)
             {
                 var recipeId = PreparationStepViewModel.NewStep.RecipeId;
-                int highestRank = _context.PreparationSteps
+                var stepListCurrentRecipe = _context.PreparationSteps
                     .Where(p => p.RecipeId == recipeId)
+                    .ToList();
+                int highestRank = 0;
+                if (stepListCurrentRecipe.Count > 0)
+                {
+                    highestRank = stepListCurrentRecipe
                     .Max(p => p.Rank);
+                }
+                else
+                {
+                    highestRank = 0;
+                }
 
                 PreparationStepViewModel.NewStep.Rank = ++highestRank;
 
