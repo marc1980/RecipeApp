@@ -76,7 +76,11 @@ namespace RecipeApp.Models
                 return NotFound();
             }
 
-            var recipe = await _context.Recipes.FindAsync(id);
+            var recipe = await _context.Recipes
+                .Where(m => m.Id == id)
+                .Include(m => m.Ingredients)
+                .Include(m => m.Steps)
+                .FirstOrDefaultAsync();
             if (recipe == null)
             {
                 return NotFound();
@@ -126,7 +130,11 @@ namespace RecipeApp.Models
        // TODO: Fix token
         public async Task<IActionResult> Delete(int id)
         {
-            var recipe = await _context.Recipes.FindAsync(id);
+            var recipe = await _context.Recipes
+                .Where(m => m.Id == id)
+                .Include(m => m.Ingredients)
+                .Include(m => m.Steps)
+                .FirstOrDefaultAsync();
             _context.Recipes.Remove(recipe);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

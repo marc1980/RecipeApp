@@ -46,7 +46,7 @@ namespace RecipeApp.Controllers
                 var stepListCurrentRecipe = _context.PreparationSteps
                     .Where(p => p.RecipeId == recipeId)
                     .ToList();
-                int highestRank = 0;
+                int highestRank;
                 if (stepListCurrentRecipe.Count > 0)
                 {
                     highestRank = stepListCurrentRecipe

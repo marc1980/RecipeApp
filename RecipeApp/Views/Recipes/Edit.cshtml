@@ -25,6 +25,45 @@
     </div>
 </div>
 
+<hr />
+<div class="col-md-6" id='ingredientTable'>
+    <h4>
+        Ingredients&nbsp;
+        <span>
+            <a href="@Url.Action( "List", "Ingredients", new { recipeId = Model.Id })">
+                <i class="glyphicon glyphicon-pencil"></i>
+            </a>
+        </span>
+    </h4>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Ingredients</h3>
+        </div>
+        <div class="panel-body">
+            @Html.Partial("~/Views/Ingredients/_IngredientListDisplay.cshtml", Model.Ingredients)
+        </div>
+    </div>
+</div>
+<div class="col-md-6" id='stepsTable'>
+    <h4>
+        Preparation steps&nbsp;
+        <span>
+            <a href="@Url.Action( "List", "PreparationSteps", new { recipeId = Model.Id })">
+                <i class="glyphicon glyphicon-pencil"></i>
+            </a>
+        </span>
+    </h4>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Steps to prepare</h3>
+        </div>
+        <div class="panel-body">
+            @Html.Partial("~/Views/PreparationSteps/_PreparationStepListDisplay.cshtml", Model.Steps)
+        </div>
+    </div>
+</div>
+<hr />
+
 
 <div>
     <a asp-action="Index">Back to List</a>
