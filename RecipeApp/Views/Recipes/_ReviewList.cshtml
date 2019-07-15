@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Review>;
+
+@foreach(var review in Model)
+{
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <div class="panel-title">@review.Reviewer</div>
+    </div>
+    <div class="panel-body">@review.Body</div>
+</div>
+}

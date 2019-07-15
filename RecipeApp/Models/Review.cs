@@ -8,6 +8,7 @@ namespace RecipeApp.Models
     public class Review
     {
         public int Id { get; set; }
+        public int RecipeId { get; set; }
         public string Reviewer { get; set; }
         public string Body { get; set; }
     }

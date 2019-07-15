@@ -55,3 +55,22 @@ body {
 .padLeft12{
     padding-left: 12px;
 }
+#grid{
+    display: grid;
+    grid-template-columns: auto 500px;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+}
+#RecipeContainer{
+    grid-column: 1;
+}
+#reviewsContainer {
+    grid-column: 2;
+    grid-row: 1 / 3;
+}
+#inputBody{
+    width: 400px;
+}
+#reviewsWrapper{
+    margin-top: 20px;
+}

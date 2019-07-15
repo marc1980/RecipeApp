@@ -47,9 +47,9 @@ namespace RecipeApp.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    RecipeId = table.Column<int>(nullable: false),
                     Rank = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    RecipeId = table.Column<int>(nullable: true)
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -59,7 +59,7 @@ namespace RecipeApp.Migrations
                         column: x => x.RecipeId,
                         principalTable: "Recipes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -68,9 +68,9 @@ namespace RecipeApp.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    RecipeId = table.Column<int>(nullable: false),
                     Reviewer = table.Column<string>(nullable: true),
-                    Body = table.Column<string>(nullable: true),
-                    RecipeId = table.Column<int>(nullable: true)
+                    Body = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -80,7 +80,7 @@ namespace RecipeApp.Migrations
                         column: x => x.RecipeId,
                         principalTable: "Recipes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

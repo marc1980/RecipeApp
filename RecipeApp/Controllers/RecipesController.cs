@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -36,6 +37,7 @@ namespace RecipeApp.Models
                 .Where(m => m.Id == id)
                 .Include(m => m.Ingredients)
                 .Include(m => m.Steps)
+                .Include(m => m.Reviews)
                 .FirstOrDefaultAsync();
             if (recipe == null)
             {
@@ -134,12 +136,29 @@ namespace RecipeApp.Models
                 .Where(m => m.Id == id)
                 .Include(m => m.Ingredients)
                 .Include(m => m.Steps)
+                .Include(m => m.Reviews)
                 .FirstOrDefaultAsync();
             _context.Recipes.Remove(recipe);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AddReview(Review review)
+        {
+            if(_context.Recipes.Any(r => r.Id == review.RecipeId))
+            {
+                _context.Reviews.Add(review);
+                await _context.SaveChangesAsync();
+                var reviews = _context.Reviews.Where(r => r.RecipeId == review.RecipeId);
+                return PartialView("~/Views/Recipes/_ReviewList.cshtml", reviews);
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json( "Error: Recipe not found" );
+            }
+        }
         private bool RecipeExists(int id)
         {
             return _context.Recipes.Any(e => e.Id == id);

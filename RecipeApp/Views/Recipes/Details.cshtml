@@ -8,24 +8,45 @@
     @Html.DisplayFor(model => model.Name) details
 </h2>
 
-
-<div class="col-md-6" id='ingredientTable'>
-    <div  class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">Ingredients</h3>
+<div id="grid">
+    <div id="RecipeContainer">
+        <div id='ingredientTable'>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Ingredients</h3>
+                </div>
+                <div class="panel-body">
+                    @Html.Partial("~/Views/Ingredients/_IngredientListDisplay.cshtml", Model.Ingredients)
+                </div>
+            </div>
         </div>
-        <div class="panel-body">
-            @Html.Partial("~/Views/Ingredients/_IngredientListDisplay.cshtml", Model.Ingredients)
+        <div id='stepsTable'>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Steps to prepare</h3>
+                </div>
+                <div class="panel-body">
+                    @Html.Partial("~/Views/PreparationSteps/_PreparationStepListDisplay.cshtml", Model.Steps)
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<div class="col-md-6" id='stepsTable'>
-    <div  class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">Steps to prepare</h3>
-        </div>
-        <div class="panel-body">
-            @Html.Partial("~/Views/PreparationSteps/_PreparationStepListDisplay.cshtml", Model.Steps)
+    <div id='reviewsContainer'>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Reviews</h3>
+            </div>
+            <div class="panel-body">
+                <form id="addReview">
+                    <input type="hidden" name="RecipeId" value="@Model.Id" />
+                    <input id="inputReviewer" type="text" name="Reviewer" placeholder="Reviewer"/>
+                    <textarea id="inputBody" name="Body" rows="5" maxlength="500" placeholder="Write your review"></textarea>
+                    <button type="button" id="btnAddReview" class="btn-default">Add review</button>
+                </form>
+                <div id="reviewsWrapper">
+                    @Html.Partial("~/Views/Recipes/_ReviewList.cshtml", Model.Reviews)
+                </div>
+            </div>
         </div>
     </div>
 </div>

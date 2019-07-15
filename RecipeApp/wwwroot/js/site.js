@@ -8,5 +8,17 @@ $(document).ready(function(){
         $("#recipeId").val( deleteRecipeId );
     });
 
+    $("#btnAddReview").on("click", function () {
+        $.ajax({
+            url: '/Recipes/AddReview',
+            type: 'post',
+            data: $('form#addReview').serialize(),
+            success: function (data) {
+                $('#inputReviewer').val("");
+                $('#inputBody').val("");
+                $('#reviewsWrapper').replaceWith(data);
+            }
 
+        });
+    });
  });
